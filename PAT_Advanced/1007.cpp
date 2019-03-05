@@ -7,15 +7,15 @@
 using namespace std;
 
 int main(){
-    int K;
+    int K,c1,c2;
     cin>>K;
     int a,table[K];
     bool flag= false;
     cin>>table[0];
-    if(table[0]>0) flag=true;
+    if(table[0]>=0) flag=true;
     for (int i = 1; i <K ; ++i) {
         cin>>a;
-        if(a>0) flag=true;
+        if(a>=0) flag=true;
         table[i]=table[i-1]+a;
     }
     if(!flag){
@@ -31,6 +31,8 @@ int main(){
                     max=table[j];
                     left=table[i];
                     right=table[j]-table[j-1];
+                    c1=i;
+                    c2=j;
                 }
             }
         } else{
@@ -39,6 +41,17 @@ int main(){
                     max=table[j]-table[i-1];
                     left=table[i]-table[i-1];
                     right=table[j]-table[j-1];
+                    c1=i;
+                    c2=j;
+                }else if(table[j]-table[i-1]==max){
+                    if(j+i<c1+c2){
+                        max=table[j]-table[i-1];
+                        left=table[i]-table[i-1];
+                        right=table[j]-table[j-1];
+                        c1=i;
+                        c2=j;
+                    }
+
                 }
             }
         }
